@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: multi-kafka
+  profiles:
+    active: huadong
+  kafka:
+    bootstrap-servers: 192.168.56.15:9092,192.168.56.16:9092,192.168.56.17:9092 # kafka集群信息，多个用逗号间隔
+    producer:
+      retries: 3
+      batch-size: 16384 #批量处理大小，16K
+      buffer-memory: 33554432 #缓冲存储大，32M
+      acks: 1
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    listener:
+      ack-mode: manual_immediate
